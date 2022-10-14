@@ -38,7 +38,7 @@ clj -X:deps prep
 
 to compile Java sources before being able to use your project.
 
-For some reason this doesn't work from inside the project. There you execute:
+For some reason this doesn't work from inside the project. To compile Java locally:
 
 ``` shell
 clojure -X:lein2deps compile-java
@@ -47,8 +47,6 @@ clojure -X:lein2deps compile-java
 ## Test runner
 
 Check out [neil](https://github.com/babashka/neil#add-test) for easily adding a test runner to `deps.edn`.
-
-to compile Java.
 
 ## License
 

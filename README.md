@@ -2,7 +2,7 @@
 
 A leiningen `project.clj` to Clojure CLI `deps.edn` converter.
 
-## [API]((API.md))
+## [API](API.md)
 
 ## Usage
 

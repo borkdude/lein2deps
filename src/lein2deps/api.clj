@@ -4,7 +4,9 @@
    [babashka.fs :as fs]
    [clojure.pprint :as pprint]
    [lein2deps.internal :refer [safe-parse convert-dep
-                               add-prep-lib]]))
+                               add-prep-lib
+                               #_:clj-kondo/ignore
+                               defproject]]))
 
 (defn lein2deps
   "Converts project.clj to deps.edn.
@@ -21,7 +23,8 @@
                           (slurp project-clj)
                           project-clj)
         project-edn (if (:eval opts)
-                      (load-string project-clj-str)
+                      (binding [*ns* (find-ns 'lein2deps.api)]
+                        (load-string project-clj-str))
                       (safe-parse project-clj-str))
         project-edn (merge {:compile-path "target/classes"
                             :source-paths ["src"]}

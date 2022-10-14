@@ -48,5 +48,6 @@ jobs:
           restore-keys: cljdeps-
 
       - name: Run tests
-        run: bb --version
-        run: bb test:clj
+        run: |
+          bb --version
+          bb test:clj

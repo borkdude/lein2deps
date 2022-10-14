@@ -30,13 +30,19 @@
                             :source-paths ["src"]}
                            project-edn)
         {:keys [dependencies source-paths resource-paths compile-path java-source-paths]} project-edn
+        deps (map convert-dep dependencies)
+        dev-deps (into {} (keep #(when (= :dev (:alias (second %)))
+                                   [(first %) (dissoc (second %) :alias)])
+                                deps))
+        deps (into {} (remove (comp :alias second) deps))
         deps-edn {:paths (cond-> (into (vec source-paths) resource-paths)
                            java-source-paths
                            (conj compile-path))
-                  :deps (into {} (map convert-dep) dependencies)}
+                  :deps deps}
         deps-edn (cond-> deps-edn
                    java-source-paths
-                   (add-prep-lib project-edn))]
+                   (add-prep-lib project-edn)
+                   (seq dev-deps) (assoc-in [:aliases :dev :extra-deps] dev-deps))]
     (when-let [f (:write-file opts)]
       (spit f (with-out-str (pprint/pprint deps-edn))))
     (when (:print opts)

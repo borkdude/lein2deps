@@ -27,14 +27,16 @@
     (symbol (str d) (str d))
     d))
 
-(defn convert-dep [[name version & {:keys [classifier exclusions]}]]
+(defn convert-dep [[name version & {:keys [classifier exclusions scope]}]]
   (let [name (qualify-dep-name name)
         name (if classifier
                (symbol (str name "$" classifier))
                name)
         params (cond-> {:mvn/version version}
                  (seq exclusions)
-                 (assoc :exclusions (mapv qualify-dep-name exclusions)))]
+                 (assoc :exclusions (mapv qualify-dep-name exclusions))
+                 (= "provided" scope)
+                 (assoc :alias :dev))]
     [name params]))
 
 (defn add-prep-lib [deps-edn project-edn]

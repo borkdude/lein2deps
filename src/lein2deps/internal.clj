@@ -43,7 +43,7 @@
            :aliases
            {:lein2deps
             {:deps
-             {'io.github.borkdude/lein2deps {:git/sha "2a351ea9e3e61f2676a3caaeb3bf63d86d164402"}}
+             {'io.github.borkdude/lein2deps {:git/sha "1bcf2fbbcbef611381e5e9ccdc77bec1e62ea5e5"}}
              :ns-default 'lein2deps.build
              :lein2deps/compile-java (cond-> {:src-dirs java-source-paths
                                               :class-dir compile-path}

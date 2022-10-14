@@ -48,6 +48,10 @@ clojure -X:lein2deps compile-java
 
 Check out [neil](https://github.com/babashka/neil#add-test) for easily adding a test runner to `deps.edn`.
 
+## How to proceed
+
+If you are new to `deps.edn`, check out [this blog article](https://blog.michielborkent.nl/new-clojure-project-quickstart.html) on how to get started quickly.
+
 ## License
 
 Copyright (c) 2022 Michiel Borkent.

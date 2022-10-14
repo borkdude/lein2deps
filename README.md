@@ -38,7 +38,7 @@ clj -X:deps prep
 
 to compile Java sources before being able to use your project.
 
-For some reason this does work from inside the project. There you execute:
+For some reason this doesn't work from inside the project. There you execute:
 
 ``` shell
 clojure -X:lein2deps compile-java

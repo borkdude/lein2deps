@@ -4,5 +4,5 @@
 (def basis (b/create-basis {:project "deps.edn"}))
 
 (defn compile-java [_]
-  (let [opts (get-in basis [:aliases :build :lein2deps/compile-java])]
+  (let [opts (get-in basis [:aliases :lein2deps :lein2deps/compile-java])]
     (b/javac (assoc opts :basis basis))))

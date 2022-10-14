@@ -4,4 +4,5 @@
  {quickdoc {:exec-args {:github/repo "borkdude/lein2deps"
                         :git/branch "main"
                         :source-paths ["src/lein2deps/api.clj"]}
-            :task (exec 'quickdoc.api/quickdoc)}}}
+            :task (exec 'quickdoc.api/quickdoc)}
+  test:clj (clojure "X:test")}}

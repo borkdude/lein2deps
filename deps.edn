@@ -1,0 +1,12 @@
+{:deps {babashka/fs {:mvn/version "0.1.11"}
+        org.babashka/cli {:mvn/version "0.5.40"}
+        borkdude/edamame {:mvn/version "1.0.0"}
+        io.github.clojure/tools.build
+        {:git/sha "984a24c0ef0a6af3f304b567adb45af40baefd08"}}
+ :aliases
+ {:test ;; added by neil
+  {:extra-paths ["test"]
+   :extra-deps {io.github.cognitect-labs/test-runner
+                 {:git/tag "v0.5.0" :git/sha "b3fd0d2"}}
+   :main-opts ["-m" "cognitect.test-runner"]
+   :exec-fn cognitect.test-runner.api/test}}}

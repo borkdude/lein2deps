@@ -5,4 +5,4 @@
                         :git/branch "main"
                         :source-paths ["src/lein2deps/api.clj"]}
             :task (exec 'quickdoc.api/quickdoc)}
-  test:clj (clojure "X:test")}}
+  test:clj (clojure "-X:test")}}

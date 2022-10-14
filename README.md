@@ -6,21 +6,21 @@ A leiningen `project.clj` to Clojure CLI `deps.edn` converter.
 
 ## Usage
 
-Via [babashka](https://babashka.org/):
+With [babashka](https://babashka.org/):
 
 ``` shell
 bb -Sdeps '{:deps {io.github.borkdude/lein2deps {:git/sha "..."}}}' \
    -m lein2deps.api --print --write-file deps.edn
 ```
 
-Via [bbin](https://github.com/babashka/bbin):
+With [bbin](https://github.com/babashka/bbin):
 
 ``` shell
 bbin install https://raw.githubusercontent.com/borkdude/tools/main/lein2deps.clj
 lein2deps --print --write-file deps.edn
 ```
 
-In Clojure:
+With Clojure:
 
 ``` shell
 clj -Sdeps '{:deps {io.github.borkdude/lein2deps {:git/sha "..."}}}' \

@@ -9,7 +9,8 @@ A leiningen `project.clj` to Clojure CLI `deps.edn` converter.
 Via [babashka](https://babashka.org/):
 
 ``` shell
-bb -Sdeps '{:deps {io.github.borkdude/lein2deps {:git/sha "..."}}}' -m lein2deps.api --print --write-file deps.edn
+bb -Sdeps '{:deps {io.github.borkdude/lein2deps {:git/sha "..."}}}' \
+   -m lein2deps.api --print --write-file deps.edn
 ```
 
 Via [bbin](https://github.com/babashka/bbin):
@@ -22,7 +23,8 @@ lein2deps --print --write-file deps.edn
 In Clojure:
 
 ``` shell
-clj -Sdeps '{:deps {io.github.borkdude/lein2deps {:git/sha "..."}}}' -M -m lein2deps.api --print --write-file deps.edn
+clj -Sdeps '{:deps {io.github.borkdude/lein2deps {:git/sha "..."}}}' \
+    -M -m lein2deps.api --print --write-file deps.edn
 ```
 
 ## Java compilation

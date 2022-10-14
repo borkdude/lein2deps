@@ -2,5 +2,6 @@
                                      :git/sha "a94ab9d46b0e5f787096b49a653b39e9ed3fd47a"}}
  :tasks
  {quickdoc {:exec-args {:github/repo "borkdude/lein2deps"
-                        :git/branch "main"}
+                        :git/branch "main"
+                        :source-paths ["src/lein2deps/api.clj"]}
             :task (exec 'quickdoc.api/quickdoc)}}}

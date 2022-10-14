@@ -40,7 +40,9 @@
       (pprint/pprint deps-edn))
     {:deps deps-edn }))
 
-(defn -main [& args]
+(defn -main
+  {:no-doc true}
+  [& args]
   (let [opts (cli/parse-opts args)]
     (if (:help opts)
       (println "Usage: lein2deps <opts>

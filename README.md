@@ -29,7 +29,7 @@ clj -Sdeps '{:deps {io.github.borkdude/lein2deps {:git/sha "..."}}}' \
 
 ## Java compilation
 
-This tool respects `:java-source-paths` in `project.clj` and adds a `:prep/lib`
+This tool respects `:java-source-paths` in `project.clj` and adds a `:deps/prep-lib`
 entry to your `deps.edn` so users of your project will have to execute:
 
 ```

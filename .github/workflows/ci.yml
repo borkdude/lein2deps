@@ -51,3 +51,4 @@ jobs:
         run: |
           bb --version
           bb test:clj
+          bb test:bb

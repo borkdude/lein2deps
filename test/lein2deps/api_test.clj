@@ -31,3 +31,11 @@
       (is (= 1 (count (:deps deps))))
       (is (= '{:extra-deps #:org.clojure{test.check #:mvn{:version "1.0.13"}}}
              (-> deps :aliases :dev))))))
+
+(deftest regex-test
+  (let [deps (:deps (lein2deps {:project-clj "
+(defproject dude/foo \"0.0.1\"
+  :dependencies [[cheshire \"1.0.0\"]
+                 [org.clojure/test.check \"1.0.13\" :scope \"provided\"]]
+  :regex #\"foo\")"}))]
+    (is (= "1.0.0" (-> deps :deps (get 'cheshire/cheshire) :mvn/version)))))

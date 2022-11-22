@@ -14,7 +14,8 @@
 
 (defn safe-parse [input]
   (let [parser (e/reader input)
-        cfg {:read-eval identity}
+        cfg {:read-eval identity
+             :regex true}
         form (first (take-while #(or
                                   (and (seq? %)
                                        (= 'defproject (first %)))

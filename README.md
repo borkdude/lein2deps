@@ -27,6 +27,14 @@ clj -Sdeps '{:deps {io.github.borkdude/lein2deps {:git/sha "..."}}}' \
     -M -m lein2deps.api --print --write-file deps.edn
 ```
 
+With Clojure CLI Tools:
+
+``` shell
+clojure -Ttools install-latest :lib io.github.borkdude/lein2deps :as lein2deps
+
+clojure -Tlein2deps lein2deps :print true :write-file "deps.edn"
+```
+
 ## Java compilation
 
 This tool respects `:java-source-paths` in `project.clj` and adds a `:deps/prep-lib`

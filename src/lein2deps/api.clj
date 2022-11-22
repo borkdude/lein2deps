@@ -44,7 +44,7 @@
                    (add-prep-lib project-edn)
                    (seq dev-deps) (assoc-in [:aliases :dev :extra-deps] dev-deps))]
     (when-let [f (:write-file opts)]
-      (spit f (with-out-str (pprint/pprint deps-edn))))
+      (spit (str f) (with-out-str (pprint/pprint deps-edn))))
     (when (:print opts)
       (pprint/pprint deps-edn))
     {:deps deps-edn }))

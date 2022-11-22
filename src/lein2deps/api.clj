@@ -29,7 +29,7 @@
         project-edn (merge {:compile-path "target/classes"
                             :source-paths ["src"]}
                            project-edn)
-        {:keys [dependencies source-paths resource-paths compile-path java-source-paths]} project-edn
+        {:keys [dependencies source-paths resource-paths compile-path java-source-paths repositories]} project-edn
         deps (map convert-dep dependencies)
         dev-deps (into {} (keep #(when (= :dev (:alias (second %)))
                                    [(first %) (dissoc (second %) :alias)])
@@ -42,6 +42,7 @@
         deps-edn (cond-> deps-edn
                    java-source-paths
                    (add-prep-lib project-edn)
+                   (seq repositories) (assoc :mvn/repos (into {} repositories))
                    (seq dev-deps) (assoc-in [:aliases :dev :extra-deps] dev-deps))]
     (when-let [f (:write-file opts)]
       (spit (str f) (with-out-str (pprint/pprint deps-edn))))

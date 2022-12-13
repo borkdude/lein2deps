@@ -3,6 +3,7 @@
    [babashka.cli :as cli]
    [babashka.fs :as fs]
    [clojure.pprint :as pprint]
+   [flatland.ordered.map :refer [ordered-map]]
    [lein2deps.internal :refer [safe-parse convert-dep
                                add-prep-lib
                                #_:clj-kondo/ignore
@@ -31,10 +32,10 @@
                            project-edn)
         {:keys [dependencies source-paths resource-paths compile-path java-source-paths repositories]} project-edn
         deps (map convert-dep dependencies)
-        dev-deps (into {} (keep #(when (= :dev (:alias (second %)))
-                                   [(first %) (dissoc (second %) :alias)])
-                                deps))
-        deps (into {} (remove (comp :alias second) deps))
+        dev-deps (into (ordered-map) (keep #(when (= :dev (:alias (second %)))
+                                              [(first %) (dissoc (second %) :alias)])
+                                           deps))
+        deps (into (ordered-map) (remove (comp :alias second) deps))
         deps-edn {:paths (cond-> (into (vec source-paths) resource-paths)
                            java-source-paths
                            (conj compile-path))

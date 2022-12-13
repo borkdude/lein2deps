@@ -1,5 +1,6 @@
 (ns lein2deps.internal
   (:require
+   [clojure.pprint :as pprint]
    [clojure.walk :as walk]
    [edamame.core :as e]))
 
@@ -56,3 +57,7 @@
            {:ensure compile-path
             :alias :lein2deps
             :fn 'compile-java})))
+
+(defn pprint [x]
+  (binding [*print-namespace-maps* false]
+    (pprint/pprint x)))

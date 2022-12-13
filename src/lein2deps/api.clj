@@ -2,11 +2,12 @@
   (:require
    [babashka.cli :as cli]
    [babashka.fs :as fs]
-   [clojure.pprint :as pprint]
+   [flatland.ordered.map :refer [ordered-map]]
    [lein2deps.internal :refer [safe-parse convert-dep
                                add-prep-lib
                                #_:clj-kondo/ignore
-                               defproject]]))
+                               defproject
+                               pprint]]))
 
 (defn lein2deps
   "Converts project.clj to deps.edn.
@@ -31,10 +32,10 @@
                            project-edn)
         {:keys [dependencies source-paths resource-paths compile-path java-source-paths repositories]} project-edn
         deps (map convert-dep dependencies)
-        dev-deps (into {} (keep #(when (= :dev (:alias (second %)))
-                                   [(first %) (dissoc (second %) :alias)])
-                                deps))
-        deps (into {} (remove (comp :alias second) deps))
+        dev-deps (into (ordered-map) (keep #(when (= :dev (:alias (second %)))
+                                              [(first %) (dissoc (second %) :alias)])
+                                           deps))
+        deps (into (ordered-map) (remove (comp :alias second) deps))
         deps-edn {:paths (cond-> (into (vec source-paths) resource-paths)
                            java-source-paths
                            (conj compile-path))
@@ -45,9 +46,9 @@
                    (seq repositories) (assoc :mvn/repos (into {} repositories))
                    (seq dev-deps) (assoc-in [:aliases :dev :extra-deps] dev-deps))]
     (when-let [f (:write-file opts)]
-      (spit (str f) (with-out-str (pprint/pprint deps-edn))))
+      (spit (str f) (with-out-str (pprint deps-edn))))
     (when (:print opts)
-      (pprint/pprint deps-edn))
+      (pprint deps-edn))
     {:deps deps-edn }))
 
 (defn -main

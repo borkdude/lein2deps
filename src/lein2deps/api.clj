@@ -28,7 +28,8 @@
                         (load-string project-clj-str))
                       (safe-parse project-clj-str))
         project-edn (merge {:compile-path "target/classes"
-                            :source-paths ["src"]}
+                            :source-paths ["src"]
+                            :resource-paths ["resources"]}
                            project-edn)
         {:keys [dependencies source-paths resource-paths compile-path java-source-paths repositories]} project-edn
         deps (map convert-dep dependencies)

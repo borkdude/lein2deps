@@ -54,7 +54,7 @@ clojure -X:lein2deps compile-java
 
 ## Lein plugin
 
-You can use the leiningen plugin to automatically synchronize your `project.clj` with a `deps.edn`.
+You can use the leiningen plugin to automatically synchronize your `project.clj` to a `deps.edn`.
 
 Add:
 

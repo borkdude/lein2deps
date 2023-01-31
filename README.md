@@ -52,6 +52,31 @@ For some reason this doesn't work from inside the project. To compile Java local
 clojure -X:lein2deps compile-java
 ```
 
+## Lein plugin
+
+You can use the leiningen plugin to automatically synchronize your `project.clj` with a `deps.edn`.
+
+Add:
+
+``` clojure
+:plugins [[io.github.borkdude/lein-lein2deps "0.1.0"]]
+```
+
+to your `project.clj` and then run:
+
+``` shell
+lein lein2deps --write-file deps.edn --print false
+```
+
+To run the plugin on any invocation of `lein`, add it to `:prep-tasks`:
+
+``` shell
+(defproject my-project "0.1.0"
+  :plugins [[io.github.borkdude/lein-lein2deps "0.1.0"]]
+  :dependencies [[org.clojure/clojure "1.11.1"]]
+  :prep-tasks [["lein2deps" "--write-file" "deps.edn" "--print" "false"]])
+```
+
 ## Test runner
 
 Check out [neil](https://github.com/babashka/neil#add-test) for easily adding a test runner to `deps.edn`.

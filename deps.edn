@@ -1,14 +1,20 @@
 {:deps {babashka/fs {:mvn/version "0.1.11"}
         org.babashka/cli {:mvn/version "0.5.40"}
         borkdude/edamame {:mvn/version "1.0.0"}
-        io.github.clojure/tools.build
-        {:git/sha "984a24c0ef0a6af3f304b567adb45af40baefd08"}
+        org.clojure/tools.build {:mvn/version "0.9.2"}
         org.flatland/ordered {:mvn/version "1.15.10"}}
  :tools/usage {:ns-default lein2deps.api}
  :aliases
- {:test ;; added by neil
+ {:neil {:project {:name io.github.borkdude/lein2deps
+                   :version "0.1.0"}}
+  :test ;; added by neil
   {:extra-paths ["test"]
    :extra-deps {io.github.cognitect-labs/test-runner
-                 {:git/tag "v0.5.0" :git/sha "b3fd0d2"}}
+                {:git/tag "v0.5.0" :git/sha "b3fd0d2"}}
    :main-opts ["-m" "cognitect.test-runner"]
-   :exec-fn cognitect.test-runner.api/test}}}
+   :exec-fn cognitect.test-runner.api/test}
+
+ :build ;; added by neil
+ {:deps {io.github.clojure/tools.build {:git/tag "v0.9.2" :git/sha "fe6b140"}
+         slipset/deps-deploy {:mvn/version "0.2.0"}}
+  :ns-default build}}}

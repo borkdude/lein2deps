@@ -70,7 +70,7 @@ lein lein2deps --write-file deps.edn --print false
 
 To run the plugin on any invocation of `lein`, add it to `:prep-tasks`:
 
-``` shell
+``` clojure
 (defproject my-project "0.1.0"
   :plugins [[io.github.borkdude/lein-lein2deps "0.1.0"]]
   :dependencies [[org.clojure/clojure "1.11.1"]]

@@ -5,4 +5,8 @@
             :url "https://opensource.org/licenses/MIT"}
   :eval-in-leiningen true
   :dependencies [[org.clojure/clojure "1.11.1"]
-                 [io.github.borkdude/lein2deps "0.1.0"]])
+                 [io.github.borkdude/lein2deps "0.1.0"]]
+  :deploy-repositories [["clojars" {:url "https://clojars.org/repo"
+                                    :username :env/clojars_user
+                                    :password :env/clojars_pass
+                                    :sign-releases false}]])

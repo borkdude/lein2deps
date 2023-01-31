@@ -1,5 +1,7 @@
 # Changelog
 
+[lein2deps](https://github.com/borkdude/lein2deps): A leiningen `project.clj` to Clojure CLI `deps.edn` converter.
+
 ## 0.1.0
 
 - `lein lein2deps` plugin. See [docs](https://github.com/borkdude/lein2deps#lein-plugin).

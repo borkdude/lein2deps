@@ -16,11 +16,13 @@
 (defn safe-parse [input]
   (let [parser (e/reader input)
         cfg {:read-eval identity
-             :regex true}
+             :regex true
+             :fn true}
         form (first (take-while #(or
                                   (and (seq? %)
                                        (= 'defproject (first %)))
-                                  (= ::e/eof %)) (repeatedly #(e/parse-next parser cfg))))
+                                  (= ::e/eof %))
+                                (repeatedly #(e/parse-next parser cfg))))
         project-clj-edn form]
     (apply hash-map (drop 3 project-clj-edn))))
 

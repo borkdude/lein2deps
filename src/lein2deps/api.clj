@@ -9,6 +9,15 @@
                                defproject
                                pprint]]))
 
+(defn ^:private repositories->repos
+  [repositories]
+  (into {}
+    (map (fn [[repo-name repo-spec]]
+           (if (string? repo-spec)
+             [repo-name {:url repo-spec}]
+             [repo-name repo-spec])))
+    repositories))
+
 (defn lein2deps
   "Converts project.clj to deps.edn.
 
@@ -44,7 +53,7 @@
         deps-edn (cond-> deps-edn
                    java-source-paths
                    (add-prep-lib project-edn)
-                   (seq repositories) (assoc :mvn/repos (into {} repositories))
+                   (seq repositories) (assoc :mvn/repos (repositories->repos repositories))
                    (seq dev-deps) (assoc-in [:aliases :dev :extra-deps] dev-deps))]
     (when-let [f (:write-file opts)]
       (spit (str f) (with-out-str (pprint deps-edn))))

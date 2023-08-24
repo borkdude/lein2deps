@@ -1,6 +1,7 @@
 (ns lein2deps.api-test
   (:require [clojure.test :refer [deftest is testing] :as t]
             [lein2deps.api :refer [lein2deps]]
+            [clojure.edn :as edn]
             [clojure.string :as str]))
 
 (deftest eval-test
@@ -65,3 +66,43 @@
 (defproject dude/foo \"0.0.1\"
   :dependencies [[cheshire \"1.0.0\"]])"}))]
     (is (str/includes? output "cheshire/cheshire {:mvn/version \"1.0.0\"}"))))
+
+(defmacro ^:private convert
+  "Given a Leiningen project definition (a form), return a deps.edn
+  configuration as EDN."
+  [project-clj]
+  `(edn/read-string
+     (with-out-str (lein2deps {:print true :project-clj (pr-str '~project-clj)}))))
+
+(deftest repositories-test
+  (is (empty?
+        (->
+          (defproject foo/bar "0.0.1"
+            :repositories [])
+          convert
+          :mvn/repos)))
+
+  (is (= {"java.net" {:url "https://download.java.net/maven/2"}}
+        (->
+          (defproject foo/bar "0.0.1"
+            :repositories [["java.net" "https://download.java.net/maven/2"]])
+          convert
+          :mvn/repos)))
+
+  (is (= {"sonatype"
+          {:checksum :fail
+           :releases {:checksum :fail :update :always}
+           :sign-releases false
+           :snapshots false
+           :update :always
+           :url "https://oss.sonatype.org/content/repositories/releases"}}
+        (->
+          (defproject foo/bar "0.0.1"
+            :repositories [["sonatype" {:url "https://oss.sonatype.org/content/repositories/releases"
+                                        :snapshots false
+                                        :sign-releases false
+                                        :checksum :fail
+                                        :update :always
+                                        :releases {:checksum :fail :update :always}}]])
+          convert
+          :mvn/repos))))

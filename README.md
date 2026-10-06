@@ -35,6 +35,22 @@ clojure -Ttools install-latest :lib io.github.borkdude/lein2deps :as lein2deps
 clojure -Tlein2deps lein2deps :print true :write-file "deps.edn"
 ```
 
+## Evaluation
+
+Use `--eval` to evaluate `project.clj` if it contains code, such as a `def` referenced with `~`:
+
+``` clojure
+(def ring-version "1.8.2")
+(defproject example "0.1.0"
+  :dependencies [[ring/ring-core ~ring-version]])
+```
+
+``` shell
+lein2deps --eval --print --write-file deps.edn
+```
+
+Only use `--eval` on a `project.clj` you trust.
+
 ## Java compilation
 
 This tool respects `:java-source-paths` in `project.clj` and adds a `:deps/prep-lib`
